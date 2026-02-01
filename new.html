@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<title>
+Mental Health & Wellbeing
+</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#2B7A78;
+}
+
+/* HEADER */
+header{
+  background:#3AAFA9;
+  color:white;
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header h1{
+  margin:0;
+}
+
+/* TOP BUTTONS */
+.nav-buttons{
+  display:flex;
+}
+
+button{
+  padding:10px 20px;
+  font-size:16px;
+  background-color:#FEFFFF;
+  color:#3AAFA9;
+  border:none;
+  border-radius:50px;
+  cursor:pointer;
+  font-weight:bold;
+  margin-right:10px;
+  transition:all 0.3s ease;
+}
+
+button:hover:not(.active){
+  background-color:#DEF2F1;
+}
+
+button.active{
+  background-color:#17252A;
+  color:white;
+}
+
+/* MAIN */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:20px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+h2{color:#17252A;}
+
+.section{display:none;}
+.section.active{display:block;}
+
+label{
+  display:block;
+  margin:10px 0 5px;
+}
+
+select{
+  width:100%;
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+.result{
+  margin-top:15px;
+  padding:15px;
+  border-radius:8px;
+  font-weight:bold;
+  display:none;
+}
+.green{background:#d4edda;color:#155724;}
+.yellow{background:#fff3cd;color:#856404;}
+.red{background:#f8d7da;color:#721c24;}
+
+.footer{
+  text-align:center;
+  font-size:13px;
+  color:#FEFFFF;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>MANAS</h1>
+  <div class="nav-buttons">
+    <button class="active" onclick="openTab('home',this)">Home</button>
+    <button onclick="openTab('student',this)">Student</button>
+    <button onclick="openTab('help',this)">Help</button>
+    <button onclick="openTab('about',this)">About Me</button>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- HOME -->
+<div id="home" class="section active card">
+  <h2>🏫 Welcome to MANAS</h2>
+  <p>
+    MANAS ek <b>School Mental Health Early Warning System</b> hai jo students ke
+    mental wellbeing, stress, pressure aur emotional health ko monitor karta hai.
+  </p>
+  <p>
+    Iska aim hai ki har student ko sahi time par support mile aur koi bhi student
+    apni problems ke saath akela mehsoos na kare.
+  </p>
+  <ul>
+    <li>Weekly mental health check-in</li>
+    <li>Positive & motivational feedback</li>
+    <li>Self-help tools and helpline support</li>
+  </ul>
+</div>
+
+<!-- STUDENT -->
+<div id="student" class="section card">
+<h2>👨‍🎓 Student Weekly Check-In</h2>
+
+<label>Aaj aapka mann kaisa hai?</label>
+<select id="q1">
+  <option value="3">😊 Achha</option>
+  <option value="2">😐 Theek</option>
+  <option value="1">😟 Kharaab</option>
+</select>
+
+<label>Padhai ka pressure?</label>
+<select id="q2">
+  <option value="3">Kam</option>
+  <option value="2">Medium</option>
+  <option value="1">Zyada</option>
+</select>
+
+<label>Neend kaise aa rahi hai?</label>
+<select id="q3">
+  <option value="3">Achhi</option>
+  <option value="2">Kabhi-kabhi</option>
+  <option value="1">Bahut kam</option>
+</select>
+
+<label>Mobile use control me hai?</label>
+<select id="q4">
+  <option value="3">Haan</option>
+  <option value="2">Kabhi-kabhi</option>
+  <option value="1">Nahi</option>
+</select>
+
+<button onclick="checkMentalHealth()">Submit</button>
+<div id="result" class="result"></div>
+</div>
+
+<!-- HELP -->
+<div id="help" class="section card">
+<h2>🧘 Self-Help Corner</h2>
+<ul>
+  <li>🌬️ Deep breathing exercise</li>
+  <li>📖 Exam stress management tips</li>
+  <li>📵 Mobile usage control routine</li>
+  <li>🤝 Kisi trusted person se baat karein</li>
+  <li>📞 Child Helpline: 1098</li>
+</ul>
+</div>
+
+<!-- ABOUT ME -->
+<div id="about" class="section card">
+<h2>👤 About Me</h2>
+<p><b>Name:</b> Lakshya Pilaniya</p>
+<p><b>Class:</b> 9</p>
+<p><b>Principal:</b> Madan Lal Pilaniya</p>
+
+<h3>📩 Contact Me</h3>
+<p><b>Email:</b> laxyapilaniya@gmail.com</p>
+<p><b>Telegram:</b> @lakshya920</p>
+</div>
+
+<div class="footer">
+© MANAS | Mental Health & Wellbeing
+</div>
+
+</div>
+
+<script>
+function openTab(tabId,btn){
+  let sections=document.querySelectorAll(".section");
+  let buttons=document.querySelectorAll(".nav-buttons button");
+
+  sections.forEach(s=>s.classList.remove("active"));
+  buttons.forEach(b=>b.classList.remove("active"));
+
+  document.getElementById(tabId).classList.add("active");
+  btn.classList.add("active");
+}
+
+function checkMentalHealth(){
+  let score =
+    +q1.value +
+    +q2.value +
+    +q3.value +
+    +q4.value;
+
+  let result=document.getElementById("result");
+  result.style.display="block";
+
+  if(score>=10){
+    result.className="result green";
+    result.innerHTML="🟢 Status: Normal<br>Aap bahut achha kar rahe ho. Aise hi positive bane raho 👍";
+  }
+  else if(score>=7){
+    result.className="result yellow";
+    result.innerHTML="🟡 Status: Stress Detected<br>Thoda rest lo, khud par vishwas rakho. Sab theek ho jayega 💪";
+  }
+  else{
+    result.className="result red";
+    result.innerHTML="🔴 Status: High Risk<br>Aap akela nahi ho. Kisi teacher ya trusted person se baat karein. 📞 1098";
+  }
+}
+</script>
+
+</body>
+</html>
